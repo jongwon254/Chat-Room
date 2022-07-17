@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -8,23 +9,18 @@ import (
 )
 
 func main() {
-	server, err := socketio.NewServer(nil)
+	server := socketio.NewServer(nil)
 
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// sockets
-	server.On("connection", func(so socketio.Socket) {
-		log.Println("New User Connected.")
-
-		// other events
+	server.OnConnect("/", func(s socketio.Conn) error {
+		s.SetContext("")
+		fmt.Println("connected:", s.ID())
+		return nil
 	})
 
 	// http
 	http.Handle("/socket.io/", server)
 	http.Handle("/", http.FileServer(http.Dir("./client")))
-	log.Println("Server on port 8080")
+	log.Println("Server on port 8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 
 }

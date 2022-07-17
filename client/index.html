@@ -21,15 +21,18 @@
                 <div id="chat-room" class="card">
                     <div class="card-body">
                         <ul>
-                            <li>message 1</li>
-                            <li>message 2</li>
+                            <li v-for="m in messages">
+                                {{ m.text }} -{{ m.date }}
+                            </li>
                         </ul>
                     </div>
                     <div class="card-footer">
                         <form>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" v-model="message">
                             <div class="d-grid gap-2">
-                                <button class="btn btn-dark btn-primary" type="button">Send</button>
+                                <button @click.prevent="sendMessage" class="btn btn-dark btn-primary" type="button">
+                                    Send
+                                </button>
                               </div>
                         </form>
                     </div>
@@ -43,7 +46,7 @@
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!-- socket.io -->
-    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

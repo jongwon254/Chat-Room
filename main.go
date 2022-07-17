@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -13,14 +12,21 @@ func main() {
 
 	server.OnConnect("/", func(s socketio.Conn) error {
 		s.SetContext("")
-		fmt.Println("connected:", s.ID())
+		log.Println("User", s.ID(), "connected.")
 		return nil
 	})
+
+	server.OnEvent("/", "msg", func(s socketio.Conn, msg string) {
+		log.Println(msg)
+	})
+
+	go server.Serve()
+	defer server.Close()
 
 	// http
 	http.Handle("/socket.io/", server)
 	http.Handle("/", http.FileServer(http.Dir("./client")))
-	log.Println("Server on port 8080...")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Println("Server on port 3000...")
+	log.Fatal(http.ListenAndServe(":3000", nil))
 
 }

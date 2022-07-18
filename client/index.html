@@ -12,25 +12,25 @@
 <body>
 
     <nav class="navbar navbar-dark bg-dark">
-        <a href="/" class="navbar-brand">Chat Room</a>
+        <a href="/" class="navbar-brand m-2">Welcome to the Chat Room!</a>
     </nav>
 
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div id="chat-room" class="card">
                     <div class="card-body">
                         <ul class="list-group">
                             <li class="list-group-item" v-for="m in messages">
-                                {{ m.text }} - {{ m.date }}
+                                {{ m.text }} &nbsp &nbsp ({{ m.date }})
                             </li>
                         </ul>
                     </div>
                     <div class="card-footer">
                         <form>
-                            <input type="text" class="form-control" v-model="message">
+                            <input type="text" class="form-control" v-model="message" placeholder="Message">
                             <div class="d-grid gap-2">
-                                <button @click.prevent="sendMessage" class="btn btn-dark btn-primary" :disabled="isDisabled" type="button">
+                                <button @click.prevent="sendMessage" class="btn btn-dark mt-2" :disabled="isDisabled" type="button">
                                     Send
                                 </button>
                               </div>

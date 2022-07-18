@@ -12,12 +12,18 @@ func main() {
 
 	server.OnConnect("/", func(s socketio.Conn) error {
 		s.SetContext("")
-		log.Println("User", s.ID(), "connected.")
+		log.Println("User" + s.ID() + "connected.")
+		s.Join("chat-room")
 		return nil
 	})
 
+	server.OnEvent("/", "welcome", func(s socketio.Conn, msg string) {
+		server.BroadcastToRoom("", "chat-room", "welcome", msg)
+	})
+
 	server.OnEvent("/", "msg", func(s socketio.Conn, msg string) {
-		log.Println(msg)
+		//s.Emit("chat message", msg)
+		server.BroadcastToRoom("", "chat-room", "chat message", msg)
 	})
 
 	go server.Serve()

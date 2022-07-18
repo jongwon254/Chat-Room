@@ -12,7 +12,7 @@ func main() {
 
 	server.OnConnect("/", func(s socketio.Conn) error {
 		s.SetContext("")
-		log.Println("User" + s.ID() + "connected.")
+		log.Println("User", s.ID(), "connected.")
 		s.Join("chat-room")
 		return nil
 	})
@@ -23,11 +23,12 @@ func main() {
 
 	server.OnEvent("/", "msg", func(s socketio.Conn, msg string) {
 		//s.Emit("chat message", msg)
-		if msg == "bye" {
+		if msg == "disconnect" {
 			server.BroadcastToRoom("", "chat-room", "chat message", "User Disconnected.")
 			s.Close()
 			server.Close()
 		} else {
+			msg := "User " + s.ID() + ": " + msg
 			server.BroadcastToRoom("", "chat-room", "chat message", msg)
 		}
 

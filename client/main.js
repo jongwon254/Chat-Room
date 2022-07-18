@@ -8,8 +8,11 @@ new Vue({
                 text: msg,
                 date: new Date().toLocaleString()
             })
+            if(msg == "User Disconnected.") {
+                this.isDisabled = true
+            }
         })
-        
+
         socket.on("welcome", (msg) => {
             this.messages.push({
                 text: msg,
@@ -21,7 +24,8 @@ new Vue({
     },
     data: {
         message: '',
-        messages: []
+        messages: [],
+        isDisabled: false
     },
     mounted: function() {
         this.sendWelcome()

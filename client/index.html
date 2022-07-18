@@ -30,7 +30,7 @@
                         <form>
                             <input type="text" class="form-control" v-model="message">
                             <div class="d-grid gap-2">
-                                <button @click.prevent="sendMessage" class="btn btn-dark btn-primary" type="button">
+                                <button @click.prevent="sendMessage" class="btn btn-dark btn-primary" :disabled="isDisabled" type="button">
                                     Send
                                 </button>
                               </div>

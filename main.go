@@ -23,7 +23,22 @@ func main() {
 
 	server.OnEvent("/", "msg", func(s socketio.Conn, msg string) {
 		//s.Emit("chat message", msg)
-		server.BroadcastToRoom("", "chat-room", "chat message", msg)
+		if msg == "bye" {
+			server.BroadcastToRoom("", "chat-room", "chat message", "User Disconnected.")
+			s.Close()
+			server.Close()
+		} else {
+			server.BroadcastToRoom("", "chat-room", "chat message", msg)
+		}
+
+	})
+
+	server.OnError("/", func(s socketio.Conn, e error) {
+		log.Println("Error:", e)
+	})
+
+	server.OnDisconnect("/", func(s socketio.Conn, reason string) {
+		log.Println("Closed.", reason)
 	})
 
 	go server.Serve()

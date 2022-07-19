@@ -1,3 +1,5 @@
+# build chat-room image and expose port
+
 FROM golang:alpine
 
 WORKDIR /app

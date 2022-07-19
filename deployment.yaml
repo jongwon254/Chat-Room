@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-room
+spec:
+  selector:
+    matchLabels:
+      app: chat-room
+  template:
+    metadata:
+      labels:
+        app: chat-room
+    spec:
+      containers:
+      - name: chat-room
+        image: jongwon254/chat-room:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000

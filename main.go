@@ -8,8 +8,10 @@ import (
 )
 
 func main() {
+	// new socketio websocket
 	server := socketio.NewServer(nil)
 
+	// new user connected
 	server.OnConnect("/", func(s socketio.Conn) error {
 		s.SetContext("")
 		log.Println("User", s.ID(), "connected.")
@@ -17,10 +19,12 @@ func main() {
 		return nil
 	})
 
+	// broadcast welcome message
 	server.OnEvent("/", "welcome", func(s socketio.Conn, msg string) {
 		server.BroadcastToRoom("", "chat-room", "welcome", msg)
 	})
 
+	// broadcast chat message or close chat
 	server.OnEvent("/", "msg", func(s socketio.Conn, msg string) {
 		//s.Emit("chat message", msg)
 		if msg == "disconnect" {

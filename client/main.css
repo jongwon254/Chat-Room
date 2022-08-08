@@ -2,3 +2,37 @@ body {
     background-color: #fff;
 }
 
+.container-fluid.mt-5 {
+    margin-right: 20px;
+}
+
+#header {
+    font-weight: 600;
+    padding-left: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-control {
+    margin-top: 13px;
+}
+
+.history {
+    margin-top: 10px;
+}
+
+#history_button {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #fff;
+    color: black;
+    font-size: 12;
+    margin-left: 400px;
+    padding: 5px;
+}
+
+#history_button:hover {
+    background-color: black;
+    color: #fff;
+}
+

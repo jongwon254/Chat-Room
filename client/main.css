@@ -19,20 +19,40 @@ body {
 
 .history {
     margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 
-#history_button {
+#get_button {
     border: 1px solid black;
     border-radius: 5px;
     background-color: #fff;
     color: black;
     font-size: 12;
-    margin-left: 400px;
+    font-weight: 600;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#delete_button {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #fff;
+    color: black;
+    font-size: 12;
+    font-weight: 600;
     padding: 5px;
 }
 
-#history_button:hover {
-    background-color: black;
+#get_button:hover {
+    background-color: green;
+    color: #fff;
+}
+
+#delete_button:hover {
+    background-color: red;
     color: #fff;
 }
 

@@ -1,4 +1,4 @@
-package controller
+package mongodb
 
 import (
 	"context"

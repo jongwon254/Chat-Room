@@ -5,9 +5,18 @@ import (
 	"net/http"
 
 	socketio "github.com/googollee/go-socket.io"
+	"github.com/jongwon254/Chat-Room/model"
+	"github.com/jongwon254/Chat-Room/mongodb"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func main() {
+
+	// mongodb setup
+	message := model.Message{ID: primitive.NewObjectID(), User: "User 1", Text: "Test Message", Date: "8.8.22"}
+	mongodb.InsertMessage(message)
+	mongodb.GetAllMessages()
+
 	// new socketio websocket
 	server := socketio.NewServer(nil)
 

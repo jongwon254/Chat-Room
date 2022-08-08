@@ -1,4 +1,4 @@
-package controller
+package mongodb
 
 import (
 	"context"
@@ -32,5 +32,5 @@ func init() {
 
 	collection = client.Database(dbName).Collection(colName)
 
-	fmt.Println("Collection ready")
+	fmt.Println("collection ready")
 }

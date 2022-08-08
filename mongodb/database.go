@@ -31,6 +31,4 @@ func init() {
 	fmt.Println("mongodb connection successful")
 
 	collection = client.Database(dbName).Collection(colName)
-
-	fmt.Println("collection ready")
 }

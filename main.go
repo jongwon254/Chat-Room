@@ -1,21 +1,19 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	socketio "github.com/googollee/go-socket.io"
 	"github.com/jongwon254/Chat-Room/model"
 	"github.com/jongwon254/Chat-Room/mongodb"
+	"github.com/jongwon254/Chat-Room/router"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func main() {
-
-	// mongodb setup
-	message := model.Message{ID: primitive.NewObjectID(), User: "User 1", Text: "Test Message", Date: "8.8.22"}
-	mongodb.InsertMessage(message)
-	mongodb.GetAllMessages()
 
 	// new socketio websocket
 	server := socketio.NewServer(nil)
@@ -35,13 +33,19 @@ func main() {
 
 	// broadcast chat message or close chat
 	server.OnEvent("/", "msg", func(s socketio.Conn, msg string) {
-		//s.Emit("chat message", msg)
 		if msg == "disconnect" {
 			server.BroadcastToRoom("", "chat-room", "chat message", "User Disconnected.")
 			s.Close()
 			server.Close()
 		} else {
-			msg := "User " + s.ID() + ": " + msg
+			// insert into db
+			date := time.Now().String()
+			user := "User " + s.ID()
+			message := model.Message{ID: primitive.NewObjectID(), User: user, Text: msg, Date: date}
+			mongodb.InsertMessage(message)
+
+			// broadcast
+			msg := user + ": " + msg
 			server.BroadcastToRoom("", "chat-room", "chat message", msg)
 		}
 
@@ -58,7 +62,15 @@ func main() {
 	go server.Serve()
 	defer server.Close()
 
-	// http
+	// http api
+	go func() {
+		fmt.Println("Server starting...")
+		r := router.Router()
+		log.Fatal(http.ListenAndServe(":8080", r))
+		fmt.Println("Listening on port 8080...")
+	}()
+
+	// http websocket
 	http.Handle("/socket.io/", server)
 	http.Handle("/", http.FileServer(http.Dir("./client")))
 	log.Println("Server on port 3000...")

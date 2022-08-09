@@ -9,7 +9,7 @@ func Router() *mux.Router {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/api/messages", mongodb.GetAllMessages).Methods("GET")
-	router.HandleFunc("/api/delete", mongodb.DeleteAll).Methods("DELETE")
+	router.HandleFunc("/api/delete", mongodb.DeleteAll).Methods("DELETE", "OPTIONS")
 
 	return router
 }

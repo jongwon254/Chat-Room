@@ -1,3 +1,4 @@
+// websocket
 var socket = io();
 
 new Vue({
@@ -27,6 +28,7 @@ new Vue({
     data: {
         message: '',
         messages: [],
+        history: [],
         isDisabled: false
     },
     // automatically send welcome message when entering chat room
@@ -42,6 +44,31 @@ new Vue({
         // method for welcome message
         sendWelcome() {
             socket.emit('welcome', "New User Connected.")
+        },
+        // method for getting history
+        getHistory() {
+            fetch("http://localhost:8080/api/messages")
+            .then(data => {
+                return data.json();
+            })
+            .then(response => {
+                this.history = response
+            })
+        },
+        // method for deleting history
+        deleteHistory() {
+            fetch("http://localhost:8080/api/delete", {
+                method: 'DELETE'
+            })
+            .then(data => {
+                return data.json();
+            })
+            .then(response => {
+                console.log(response)
+            })
+
+            // update empty history
+            this.getHistory()
         }
     }
 })

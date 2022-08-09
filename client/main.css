@@ -56,3 +56,13 @@ body {
     color: #fff;
 }
 
+.list-group {
+    border: none;
+    margin: 0;
+}
+
+#list-history {
+    border: none;
+    padding: 0;
+}
+

@@ -16,10 +16,10 @@
     </nav>
 
     <!-- Bootstrap container with card and list group -->
-    <div class="container-fluid mt-5">
+    <div id="chat-room" class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div id="chat-room" class="card">
+                <div  class="card">
                     <div class="card-body">
                         <ul class="list-group">
                             <li class="list-group-item" v-for="m in messages">
@@ -37,11 +37,22 @@
                               </div>
                         </form>
                     </div>
+
+                    
                 </div>
+                
                 <div class="history">
-                    <button id="get_button">See History</button>
-                    <button id="delete_button">Delete History</button>
+                    <button @click="getHistory" id="get_button">See History</button>
+                    <button @click="deleteHistory" id="delete_button">Delete History</button>
                 </div>
+                <div class="messages">
+                    <ul class="list-group">
+                        <li id="list-history" class="list-group-item" v-for="h in history">
+                            {{ h.user }}: &nbsp &nbsp {{ h.text }} &nbsp &nbsp {{ h.date }}
+                        </li>
+                    </ul>
+                </div>
+
             </div>
             
         </div>

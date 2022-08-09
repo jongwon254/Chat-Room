@@ -39,7 +39,8 @@ func main() {
 			server.Close()
 		} else {
 			// insert into db
-			date := time.Now().String()
+			date := time.Now().Format(time.RFC822)
+			fmt.Println(date)
 			user := "User " + s.ID()
 			message := model.Message{ID: primitive.NewObjectID(), User: user, Text: msg, Date: date}
 			mongodb.InsertMessage(message)
@@ -64,10 +65,9 @@ func main() {
 
 	// http api
 	go func() {
-		fmt.Println("Server starting...")
+		fmt.Println("Server starting on port 8080...")
 		r := router.Router()
 		log.Fatal(http.ListenAndServe(":8080", r))
-		fmt.Println("Listening on port 8080...")
 	}()
 
 	// http websocket

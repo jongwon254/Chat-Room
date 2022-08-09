@@ -56,13 +56,22 @@ body {
     color: #fff;
 }
 
-.list-group {
-    border: none;
-    margin: 0;
+.messages {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 100px;
+    background-color: #fff;
 }
 
 #list-history {
-    border: none;
-    padding: 0;
+    border-radius: 2px;
+    padding: 2px;
+    padding-left: 5px;
+}
+
+.history-title {
+    margin-bottom: 7px;
+    font-weight: 600;
 }
 

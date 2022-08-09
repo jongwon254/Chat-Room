@@ -29,7 +29,8 @@ new Vue({
         message: '',
         messages: [],
         history: [],
-        isDisabled: false
+        isDisabled: false,
+        show: false
     },
     // automatically send welcome message when entering chat room
     mounted: function() {
@@ -47,6 +48,7 @@ new Vue({
         },
         // method for getting history
         getHistory() {
+            this.show = true
             fetch("http://localhost:8080/api/messages")
             .then(data => {
                 return data.json();
@@ -57,6 +59,7 @@ new Vue({
         },
         // method for deleting history
         deleteHistory() {
+            this.show = false
             fetch("http://localhost:8080/api/delete", {
                 method: 'DELETE'
             })

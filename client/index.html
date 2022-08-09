@@ -45,10 +45,14 @@
                     <button @click="getHistory" id="get_button">See History</button>
                     <button @click="deleteHistory" id="delete_button">Delete History</button>
                 </div>
-                <div class="messages">
+                <div class="messages" v-show="show">
                     <ul class="list-group">
+                        <span class="history-title">
+                            Message History:
+                        </span>
                         <li id="list-history" class="list-group-item" v-for="h in history">
-                            {{ h.user }}: &nbsp &nbsp {{ h.text }} &nbsp &nbsp {{ h.date }}
+                            
+                            {{ h.user }}: &nbsp &nbsp {{ h.text }} &nbsp &nbsp &nbsp ({{ h.date }})
                         </li>
                     </ul>
                 </div>

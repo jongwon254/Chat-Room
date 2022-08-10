@@ -1,10 +1,9 @@
-# run chat-room docker container on kubernetes cluster and expose service
-# also runs on Azure Kubernetes Cluster
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chat-room
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: chat-room
@@ -13,15 +12,24 @@ spec:
       labels:
         app: chat-room
     spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
       containers:
       - name: chat-room
         image: jongwon254/chat-room:latest
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
         resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
           limits:
-            memory: "128Mi"
-            cpu: "500m"
+            cpu: 250m
+            memory: 256Mi
         ports:
         - containerPort: 3000
+          name: redis
 ---
 apiVersion: v1
 kind: Service

@@ -49,7 +49,7 @@ new Vue({
         sendWelcome() {
             socket.emit('welcome', "New User Connected.")
         },
-        // method for retrieving chat history
+        // method for retrieving chat history from API connected to MongoDB
         getHistory() {
             this.show = true
             fetch("http://localhost:8080/api/messages")
@@ -60,7 +60,7 @@ new Vue({
                 this.history = response
             })
         },
-        // method for deleting chat history
+        // method for deleting chat history of DB via API
         deleteHistory() {
             this.show = false
             fetch("http://localhost:8080/api/delete", {

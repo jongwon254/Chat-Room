@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// Helper Methods
+// Helper Methods for MongoDB connection
 
 // insert message into database
 func insertMessage(message model.Message) {

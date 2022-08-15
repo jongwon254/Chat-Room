@@ -1,10 +1,12 @@
 // websocket
 var socket = io();
 
+// new Vue App
 new Vue({
     el: '#chat-room',
     created() {
-        // listen for chat message and display on frontend
+
+        // listen for chat message and display on website
         socket.on("chat message", (msg) => {
             this.messages.push({
                 text: msg,
@@ -16,7 +18,7 @@ new Vue({
             }
         })
 
-        // listen for welcome message and display on frontend
+        // listen for welcoming message and display on frontend
         socket.on("welcome", (msg) => {
             this.messages.push({
                 text: msg,
@@ -32,21 +34,22 @@ new Vue({
         isDisabled: false,
         show: false
     },
-    // automatically send welcome message when entering chat room
+    // automatically send welcoming message when entering chat room
     mounted: function() {
         this.sendWelcome()
     },
     methods: {
+
         // method for send button
         sendMessage() {
             socket.emit('msg', this.message)
             this.message = ''
         },
-        // method for welcome message
+        // method for welcoming message
         sendWelcome() {
             socket.emit('welcome', "New User Connected.")
         },
-        // method for getting history
+        // method for retrieving chat history
         getHistory() {
             this.show = true
             fetch("http://localhost:8080/api/messages")
@@ -57,7 +60,7 @@ new Vue({
                 this.history = response
             })
         },
-        // method for deleting history
+        // method for deleting chat history
         deleteHistory() {
             this.show = false
             fetch("http://localhost:8080/api/delete", {

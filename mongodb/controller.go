@@ -7,14 +7,14 @@ import (
 	"github.com/jongwon254/Chat-Room/model"
 )
 
-// db controller
+// MongoDB Controller
 
-// insert in backend
+// insert message into database
 func InsertMessage(message model.Message) {
 	insertMessage(message)
 }
 
-// get via endpoint
+// get chat history, set request header and encode into JSON
 func GetAllMessages(w http.ResponseWriter, r *http.Request) {
 	allMessages := getAll()
 
@@ -25,7 +25,7 @@ func GetAllMessages(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(allMessages)
 }
 
-// delete via endpoint
+// delete chat history, set request header and encode into JSON
 func DeleteAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
 	w.Header().Set("Allow-Control-Allow-Methods", "DELETE")

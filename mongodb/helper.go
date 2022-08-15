@@ -10,8 +10,9 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// helper methods
-// insert into db
+// Helper Methods
+
+// insert message into database
 func insertMessage(message model.Message) {
 	inserted, err := collection.InsertOne(context.Background(), message)
 
@@ -44,6 +45,7 @@ func getAll() []primitive.M {
 
 	var messages []primitive.M
 
+	// loop through messages
 	for cursor.Next(context.Background()) {
 		var message bson.M
 		err := cursor.Decode(&message)

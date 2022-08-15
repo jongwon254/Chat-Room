@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// MongoDB Atlas on Azure
+// MongoDB Atlas DB on Azure
 const connectionString = "mongodb+srv://jongwon254:1234@cluster0.izncidl.mongodb.net/?retryWrites=true&w=majority"
 const dbName = "chatroom"
 const colName = "messages"
@@ -30,5 +30,6 @@ func init() {
 
 	fmt.Println("mongodb connection successful")
 
+	// collection ready
 	collection = client.Database(dbName).Collection(colName)
 }

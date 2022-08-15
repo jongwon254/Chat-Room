@@ -26,7 +26,7 @@ func main() {
 		return nil
 	})
 
-	// broadcast welcome message
+	// broadcast welcoming message
 	server.OnEvent("/", "welcome", func(s socketio.Conn, msg string) {
 		server.BroadcastToRoom("", "chat-room", "welcome", msg)
 	})
@@ -52,6 +52,7 @@ func main() {
 
 	})
 
+	// Exceptions
 	server.OnError("/", func(s socketio.Conn, e error) {
 		log.Println("Error:", e)
 	})
@@ -60,17 +61,18 @@ func main() {
 		log.Println("Closed.", reason)
 	})
 
+	// start and close server
 	go server.Serve()
 	defer server.Close()
 
-	// http api
+	// HTTP API service for connecting to MongoDB (port 8080)
 	go func() {
 		fmt.Println("Server starting on port 8080...")
 		r := router.Router()
 		log.Fatal(http.ListenAndServe(":8080", r))
 	}()
 
-	// http websocket
+	// HTTP Websocket for Chat Room (port 3000)
 	http.Handle("/socket.io/", server)
 	http.Handle("/", http.FileServer(http.Dir("./client")))
 	log.Println("Server on port 3000...")

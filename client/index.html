@@ -11,6 +11,7 @@
 </head>
 <body>
 
+    <!-- Header -->
     <nav id="header" class="navbar navbar-dark bg-dark">
         <a href="/" class="navbar-brand">Welcome to the Chat Room!</a>
     </nav>
@@ -22,6 +23,8 @@
                 <div  class="card">
                     <div class="card-body">
                         <ul class="list-group">
+
+                            <!-- Messsages from Websocket -->
                             <li class="list-group-item" v-for="m in messages">
                                 {{ m.text }} &nbsp &nbsp ({{ m.date }})
                             </li>
@@ -37,28 +40,26 @@
                               </div>
                         </form>
                     </div>
-
-                    
                 </div>
                 
+                <!-- History buttons -->
                 <div class="history">
                     <button @click="getHistory" id="get_button">See History</button>
                     <button @click="deleteHistory" id="delete_button">Delete History</button>
                 </div>
+
+                <!-- History container -->
                 <div class="messages" v-show="show">
                     <ul class="list-group">
                         <span class="history-title">
                             Chat History:
                         </span>
                         <li id="list-history" class="list-group-item" v-for="h in history">
-                            
                             {{ h.user }}: &nbsp &nbsp {{ h.text }} &nbsp &nbsp &nbsp ({{ h.date }})
                         </li>
                     </ul>
                 </div>
-
-            </div>
-            
+            </div>           
         </div>
     </div>
     

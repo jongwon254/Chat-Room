@@ -1,5 +1,6 @@
-# run chat-room docker container on kubernetes cluster and expose service
-# also runs on Azure Kubernetes Cluster
+# Deployment of docker container on kubernetes cluster and exposing service as LoadBalancer
+# Also runs on Azure Kubernetes Cluster
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -1,7 +1,7 @@
 ![chat](https://user-images.githubusercontent.com/36485235/185006091-4fb542c2-a61a-4854-85c2-cf883d15c52b.png)
 
 # Chat Room
-Real time multi user chatting app with stored chat history.
+Real time multi user chat app with stored chat history.
 
 ## Technologies
 - Languages: Go, JavaScript, HTML, CSS

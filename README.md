@@ -14,7 +14,7 @@ Real time multi user chatting app with stored chat history.
   
 ## Functionality
 - The Chat API provides two endpoints to receive and delete the chat history from the database in MongoDB.
-- API CONNECTION:
+- API Connection:
  1. GET: BASE_URL/API/MESSAGES
     - RESPONSE: ID, USER, TEXT, DATE
  2. DELETE: BASE_URL/API/DELETE

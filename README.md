@@ -24,3 +24,11 @@ Real time multi user chatting app with stored chat history.
  - The user can also close the chat for all connected user by sending a disconnecting message that disables further messages
  - Users can see messages from different users in real time
  - The chat history is fetched or deleted via an own REST API connected to MongoDB
+
+## Screenshots
+<img width="800" alt="chat2" src="https://user-images.githubusercontent.com/36485235/185007093-c9aecfd0-4b9f-486a-a7ce-0edb18e10a1b.png">
+<img width="800" alt="chat14" src="https://user-images.githubusercontent.com/36485235/185007117-b3bdce25-147b-4ad9-95f1-d786e2403bf6.png">
+<img width="800" alt="chat17" src="https://user-images.githubusercontent.com/36485235/185007127-48130c41-4ec6-4435-bb1b-480a9f5a57d5.png">
+
+## More Info
+[Visit Website](https://jongwonlee.dev/chat-room)
